@@ -32,7 +32,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		// 録画ボタン
 		if ( id == R.id.rec_btn ) {
 			Intent intent =
-//					new Intent( this, VideoActivity.class);
 				new Intent(this, RecorderActivity.class);
 			startActivity(intent);
 		}
