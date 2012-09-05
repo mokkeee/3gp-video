@@ -8,19 +8,11 @@ import android.media.MediaRecorder;
 import android.os.Environment;
 import android.text.format.DateFormat;
 import android.view.SurfaceHolder;
-import android.widget.VideoView;
+import android.view.SurfaceView;
 
-class VideoCameraView extends VideoView implements SurfaceHolder.Callback {
+class VideoCameraView extends SurfaceView implements SurfaceHolder.Callback {
 	private SurfaceHolder holder;		// ホルダー
 	private MediaRecorder recorder;	// メディアレコーダー
-	
-//	private static final int VIDEO_SOURCE = MediaRecorder.VideoSource.DEFAULT;
-	private static final int VIDEO_SOURCE = MediaRecorder.VideoSource.CAMERA;
-	
-	private static final int OUTPUT_FORMAT = MediaRecorder.OutputFormat.THREE_GPP;
-	
-	private static final int VIDEO_ENCODER = MediaRecorder.VideoEncoder.MPEG_4_SP;
-//	private static final int VIDEO_ENCODER = MediaRecorder.VideoEncoder.DEFAULT;
 	
 	/** Photo-U動画最大ファイルサイズ */
 	private static final long MAX_FILESIZE_PHOTO_U = 2 * 1024 * 1024;
@@ -35,9 +27,6 @@ class VideoCameraView extends VideoView implements SurfaceHolder.Callback {
 		// サーフェイスホルダーの生成
 		holder = getHolder();
 		holder.addCallback(this	);
-		
-		// レコーダ生成
-		recorder = new MediaRecorder();
 	}
 	
 	/**
@@ -46,10 +35,19 @@ class VideoCameraView extends VideoView implements SurfaceHolder.Callback {
 	 */
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
+		// レコーダ生成
+		recorder = new MediaRecorder();
+		
 		try {
-			recorder.setVideoSource(VIDEO_SOURCE);
-			recorder.setOutputFormat(OUTPUT_FORMAT);
-			recorder.setVideoEncoder(VIDEO_ENCODER);
+//			recorder.setVideoSource(MediaRecorder.VideoSource.DEFAULT);	//NG
+			recorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
+//			recorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
+			
+			recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+			
+//			recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
+			recorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);
+			
 
 			File file = createFile();
 			recorder.setOutputFile(file.getAbsolutePath());
@@ -88,12 +86,15 @@ class VideoCameraView extends VideoView implements SurfaceHolder.Callback {
 		try {
 			recorder.stop();
 			recorder.reset();
-//			recorder.release();
+			recorder.release();
+
+			// レコーダの処理が完了するまで少し待つといいっぽい
+			recorder.wait(100);
 		}
 		catch (Exception  e) {
 			android.util.Log.e("destroy", e.toString());
 		}
-		
+
 	}
 	
 	/**
@@ -102,7 +103,7 @@ class VideoCameraView extends VideoView implements SurfaceHolder.Callback {
 	 */
 	private File createFile() {
 		// TODO もう少し綺麗なやり方あるんじゃないかと。。
-		File dir = new File(Environment.getExternalStorageDirectory().getAbsoluteFile().toString() + "/3gpVideoCamera");
+		File dir = new File(Environment.getExternalStorageDirectory().toString() + "/3gpVideoCamera");
 //		File dir = Environment.getExternalStorageDirectory();
 //		File dir = Environment.getDataDirectory();
 		if ( dir.exists() == false ) {
