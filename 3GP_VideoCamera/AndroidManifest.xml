@@ -25,11 +25,11 @@
             </intent-filter>
         </activity>
         <activity
-        	android:name=".recorder.RecorderActivity"
+        	android:name=".recorder.VideoActivity"
         	android:screenOrientation="landscape">
         </activity>
         <activity
-        	android:name=".recorder.Recorder2Activity"
+        	android:name=".recorder.VideoWithSoundActivity"
         	android:screenOrientation="landscape">
         </activity>
     </application>

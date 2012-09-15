@@ -16,6 +16,9 @@ class VideoCameraView extends SurfaceView implements SurfaceHolder.Callback {
 
 	/** ビデオ起動中か否か */
 	private boolean serviceEnable;
+	
+	/** サウンドを有効にするか否か */
+	private boolean soundEnable;
 
 	/** Photo-U動画最大ファイルサイズ */
 	private static final long MAX_FILESIZE_PHOTO_U = 2 * 1024 * 1024;
@@ -33,8 +36,19 @@ class VideoCameraView extends SurfaceView implements SurfaceHolder.Callback {
 		holder.addCallback(this);
 
 		serviceEnable = false;
+		soundEnable = false;
 	}
 
+	/**
+	 * コンストラクタ
+	 * @param context 
+	 * @param soundEnable 音声録音の有効・無効
+	 */
+	public VideoCameraView(Context context, boolean soundEnable) {
+		this(context);
+		this.soundEnable = soundEnable;
+	}
+	
 	/**
 	 * サーフェイス生成イベントの処理
 	 * 
@@ -50,14 +64,18 @@ class VideoCameraView extends SurfaceView implements SurfaceHolder.Callback {
 				try {
 					// recorder.setVideoSource(MediaRecorder.VideoSource.DEFAULT);
 					// //NG
+					if (soundEnable) {
+						 recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+					}
 					recorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-					// recorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
-
+					
 					recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 
-					// recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
+					if (soundEnable) {
+						 recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+					}
 					recorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);
-
+					
 					File file = createFile();
 					recorder.setOutputFile(file.getAbsolutePath());
 

@@ -4,5 +4,6 @@
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">VideoCamera</string>
     <string name="rec_bottun_name">recording(no sounds)</string>
+    <string name="rec_sound_bottun_name">recording(sounds)</string>
 
 </resources>

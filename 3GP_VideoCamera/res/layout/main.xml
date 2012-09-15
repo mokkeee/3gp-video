@@ -5,12 +5,20 @@
 
     <Button
         android:id="@+id/rec_btn"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="82dp"
+        android:layout_marginTop="62dp"
         android:text="@string/rec_bottun_name" />
 
+    <Button
+        android:id="@+id/rec_sound_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="142dp"
+        android:text="@string/rec_sound_bottun_name" />
 
 </RelativeLayout>

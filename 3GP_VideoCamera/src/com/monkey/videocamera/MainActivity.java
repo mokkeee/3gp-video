@@ -5,7 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.monkey.videocamera.recorder.RecorderActivity;
+import com.monkey.videocamera.recorder.VideoActivity;
+import com.monkey.videocamera.recorder.VideoWithSoundActivity;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -16,6 +17,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         
 
 		findViewById(R.id.rec_btn).setOnClickListener(this);
+		findViewById(R.id.rec_sound_btn).setOnClickListener(this);
     }
 
     /*
@@ -32,8 +34,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		// 録画ボタン
 		if ( id == R.id.rec_btn ) {
 			Intent intent =
-				new Intent(this, RecorderActivity.class);
+				new Intent(this, VideoActivity.class);
 //				new Intent(this, Recorder2Activity.class);
+			startActivity(intent);
+		} else if ( id == R.id.rec_sound_btn ) {
+			Intent intent =
+					new Intent(this, VideoWithSoundActivity.class);
 			startActivity(intent);
 		}
 	}
