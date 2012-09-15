@@ -61,6 +61,7 @@ class VideoCameraView extends SurfaceView implements SurfaceHolder.Callback {
 //			recorder.setVideoFrameRate(30);
 
 			// ビデオサイズ
+			// TODO スマホの情報取得して解像度とか取れないの？
 			recorder.setVideoSize(640, 480); // OK
 //			recorder.setVideoSize(840, 680); //NG
 //			recorder.setVideoSize(480, 640); //NG
@@ -90,6 +91,7 @@ class VideoCameraView extends SurfaceView implements SurfaceHolder.Callback {
 
 			// レコーダの処理が完了するまで少し待つといいっぽい
 			recorder.wait(100);
+//			System.out.println("recording finished.");
 		}
 		catch (Exception  e) {
 			android.util.Log.e("destroy", e.toString());
