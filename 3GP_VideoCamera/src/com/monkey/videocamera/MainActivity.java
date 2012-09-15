@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.monkey.videocamera.recorder.Recorder2Activity;
+import com.monkey.videocamera.recorder.RecorderActivity;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -32,7 +32,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 		// 録画ボタン
 		if ( id == R.id.rec_btn ) {
 			Intent intent =
-				new Intent(this, Recorder2Activity.class);
+				new Intent(this, RecorderActivity.class);
+//				new Intent(this, Recorder2Activity.class);
 			startActivity(intent);
 		}
 	}

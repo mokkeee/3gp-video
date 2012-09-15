@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.Window;
 
 public class RecorderActivity extends Activity {
-	VideoCameraView view;
+	private VideoCameraView view;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -15,4 +15,9 @@ public class RecorderActivity extends Activity {
 		setContentView(view);
 	}
 
+	@Override
+	protected void onStop() {
+		super.onStop();
+		view.stopRecording();
+	}
 }
